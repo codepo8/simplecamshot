@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Very simple cam</title>
+	<style type="text/css">
+		html {
+			background: #111111;
+			height: 100%;
+			background: linear-gradient( #333, #000);
+		}
+		canvas {
+			display: none;
+		}
+		video, img, #startbutton {
+			display: block;
+			float: left;
+			border: 10px solid #fff;
+			border-radius: 10px;
+		}
+		#startbutton {
+			background: green;
+			border: none;
+			color: #fff;
+			margin: 100px 20px 20px 20px;
+			padding: 10px 20px;
+			font-size: 20px;
+		}
+		#container {
+			overflow: hidden;
+			width: 880px;
+			margin: 20px auto;
+		}
+    video, img, #photobutton {
+      display: none;
+    }
+	</style>
+</head>
+<body>
+	<div id="container">
+		<video id="video"></video>
+		<button id="startbutton">Use my camera</button>
+		<button id="photobutton">Take photo</button>
+		<canvas id="canvas"></canvas>
+		<img src="http://placekitten.com/g/320/261" id="photo" alt="photo">
+  </div>
+<script>
+(function() {
+
+    var video = document.querySelector('video');
+    var constraints = { audio: false, video: { width: 768, height: 576 } };
+
+    if (navigator.mediaDevices) {
+      startbutton.style.display = 'block';
+    }
+
+    startbutton.addEventListener('click', function(ev) {
+      var p = navigator.mediaDevices.getUserMedia(constraints);
+
+      p.then(function(mediaStream) {
+        video.src = window.URL.createObjectURL(mediaStream);
+        video.onloadedmetadata = function(e) {
+          video.style.display = 'block';
+          photo.style.display = 'block';
+          photobutton.style.display = 'block';
+          console.log(e);
+            video.play();
+        };
+      });
+      ev.preventDefault();
+
+    }, false);
+
+    photobutton.addEventListener('click', function(ev) {
+      console.log(video);
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      var data = canvas.toDataURL('image/png');
+      photo.setAttribute('src', data);
+      ev.preventDefault();
+    });
+
+
+})();
+</script>
+</body>
+</html>

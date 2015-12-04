@@ -1,0 +1,33 @@
+body {
+  background: #111111;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  color: #ccc;
+  padding: 2em;
+}
+button {
+  border: none;
+  padding: 5px 10px;
+  background: darkgreen;
+  color: snow;
+}
+video {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+button.video {
+  padding: 0;
+  border: none;
+  margin: 1em 0;
+  border: none;
+  display: block;
+}
+output {
+  color: #333;
+  background: #ccc;
+  overflow: auto;
+  height: 100px;
+  padding: 5px;
+  display: block;
+}

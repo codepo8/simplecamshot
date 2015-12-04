@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <title>Very simple cam</title>
+  <link rel="stylesheet" href="demostyles.css">
+</head>
+<body>
+<h1>SimpleCamShot - no image demo</h1>
+<div id="simplecam"></div>
+<output></output>
+
+<script src="simplecamshot.js"></script>
+<script>
+simplecamshot.config.createImage = false;
+simplecamshot.init(document.querySelector('#simplecam'));
+document.querySelector('#simplecam').addEventListener(
+  'imagetaken',
+   function(data) {
+     document.querySelector('output').innerHTML = data.detail;
+  }
+);
+</script>
+</body>
+</html>
