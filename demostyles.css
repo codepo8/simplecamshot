@@ -10,7 +10,21 @@ button {
   padding: 5px 10px;
   background: darkgreen;
   color: snow;
+  font-size: 24px;
 }
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+nav li {
+  margin: 10px 0;
+  display: inline-block;
+  padding: 5px 10px 5px 0;
+}
+nav a {
+  color: lightgoldenrodyellow;
+}
+
 video {
   display: block;
   margin: 0;
@@ -23,6 +37,13 @@ button.video {
   border: none;
   display: block;
 }
+h1 {
+  font-weight: lighter;
+  color: dodgerblue;
+}
+a {
+  color: forestgreen;
+}
 output {
   color: #333;
   background: #ccc;
@@ -30,4 +51,11 @@ output {
   height: 100px;
   padding: 5px;
   display: block;
+}
+footer {
+  color: darkslategray;
+  display: block;
+  text-align: right;
+  padding: 10px;
+  margin-top: 100px;
 }

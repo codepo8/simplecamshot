@@ -2,11 +2,11 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
-  <title>SimpleCamShot</title>
+  <title>Very simple cam</title>
   <link rel="stylesheet" href="demostyles.css">
 </head>
 <body>
-<h1>SimpleCamShot - Simple Demo</h1>
+<h1>SimpleCamShot - Own Photo Demo</h1>
 
 <nav>
   <ul>
@@ -19,13 +19,25 @@
 </nav>
 
 <div id="simplecam"></div>
+
+<img src="http://placekitten.com/g/320/261" alt="kitten">
+
 <script src="simplecamshot.js"></script>
 <script>
-  simplecamshot.init(document.querySelector('#simplecam'));
+var camelement = document.querySelector('#simplecam');
+simplecamshot.config.createImage = false;
+simplecamshot.init(camelement);
+camelement.addEventListener(
+  'imagetaken',
+   function(data) {
+     document.querySelector('img').src = data.detail;
+  }
+);
 </script>
 
 <p>This is a demo page for <a href="https://github.com/codepo8/simplecamshot">SimpleCamShot</a>. Go there to read all about it, fork it, file issues, praise the maker and such.</p>
 
 <footer>Written by Chris Heilmann using Visual Studio Code…</footer>
+
 </body>
 </html>
