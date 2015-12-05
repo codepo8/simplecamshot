@@ -12,6 +12,10 @@ button {
   color: snow;
   font-size: 24px;
 }
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
 nav ul {
   margin: 0;
   padding: 0;
