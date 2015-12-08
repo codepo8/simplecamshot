@@ -38,7 +38,7 @@ var simplecamshot = function() {
     );
 
     /* If the browser isn't capable, leave */
-    if (!navigator.getMedia) {
+    if (!navigator.mediaDevices && !navigator.getMedia) {
       button.remove();
       return;
     }
@@ -83,32 +83,50 @@ var simplecamshot = function() {
       /* If the video isn't playing yet */
       if (!button.playing) {
 
-        /* Request a video */
-        navigator.getMedia(
-          {
-            video: true,
-            audio: false
-          },
-          /* Browser prefixes, browser prefixes everywhere… */
-          function(stream) {
-            if (navigator.mozGetUserMedia) {
-              video.mozSrcObject = stream;
-            } else {
-              var vendorURL = window.URL || window.webkitURL;
-              video.src = vendorURL.createObjectURL(stream);
+        // If the mediaDevices API is supported…
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          var constraints = {
+            audio: false, video: {
+              width: 768, height: 576
             }
-            /* cache stream reference to stop video later */
+          };
+          var p = navigator.mediaDevices.getUserMedia(constraints);
+
+          p.then(function(stream) {
+            video.src = window.URL.createObjectURL(stream);
             video.play();
             currentstream = stream;
-          },
+          });
 
-          /* If something went wrong, hide video and photo */
-          function(err) {
-            console.log('Bugger: ' + err);
-            videobutton.style.display = 'none';
-            photo.style.display = 'none';
-          }
-        );
+        // or use good old gUM…
+        } else {
+          /* Request a video */
+          navigator.getMedia({
+              video: true,
+              audio: false
+            },
+            /* Browser prefixes, browser prefixes everywhere… */
+            function(stream) {
+              if (navigator.mozGetUserMedia) {
+                video.mozSrcObject = stream;
+              } else {
+                var vendorURL = window.URL || window.webkitURL;
+                video.src = vendorURL.createObjectURL(stream);
+              }
+              /* cache stream reference to stop video later */
+              video.play();
+              currentstream = stream;
+            },
+
+            /* If something went wrong, hide video and photo */
+            function(err) {
+              console.log('Bugger: ' + err);
+              videobutton.style.display = 'none';
+              photo.style.display = 'none';
+            }
+          );
+        }
+
         /* toggle button */
         button.innerHTML = config.stopLabel;
         button.playing = true;
