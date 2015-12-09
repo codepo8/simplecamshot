@@ -62,6 +62,6 @@ camelement.addEventListener(
 
 This was tested on a Desktop using Firefox, Chrome, Opera and Microsoft Edge. Safari doesn't support the way this is implemented, and - like any other browser that doesn't - it means the button will never show up. The idea of this script is to only offer this functionality when it can be done instead of polyfilling. It is meant to enhance a photo upload form.
 
-## Future updates
+The script uses the new, Promise based media devices API and falls back to the older getUserMedia API on non-supporting browsers. The newer API results in higher resolution photos.
 
-Currently this script uses the old gUM API as it seems to me to be still better supported across browsers. I will update it to the better API (shown n the new-api-test.html) once it is better supported. 
+

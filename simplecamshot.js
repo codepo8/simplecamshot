@@ -87,11 +87,10 @@ var simplecamshot = function() {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
           var constraints = {
             audio: false, video: {
-              width: 768, height: 576
+              width: 1280, height: 720
             }
           };
           var p = navigator.mediaDevices.getUserMedia(constraints);
-
           p.then(function(stream) {
             video.src = window.URL.createObjectURL(stream);
             video.play();
