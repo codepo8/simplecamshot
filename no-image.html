@@ -34,9 +34,19 @@ document.querySelector('#simplecam').addEventListener(
 );
 </script>
 
-
 <p>This is a demo page for <a href="https://github.com/codepo8/simplecamshot">SimpleCamShot</a>. Go there to read all about it, fork it, file issues, praise the maker and such.</p>
 
 <footer>Written by Chris Heilmann using Visual Studio Code…</footer>
+<script>
+  var adblock = false;
+var test = document.createElement('div');
+test.innerHTML = 'x';
+test.className = 'adsbox';
+document.body.appendChild(test);
+var adblock = test.offsetHeight === 0;
+test.remove();
+console.log(adblock);
+
+  </script>
 </body>
 </html>

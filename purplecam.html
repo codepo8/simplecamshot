@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>PurpleCam</title>
+  <link rel="stylesheet" href="demostyles.css">
+</head>
+<body>
+<h1>PurpleCam - RIP Prince</h1>
+
+<div id="simplecam"></div>
+<script src="simplecamshot.js"></script>
+<script>
+var container = document.querySelector('#simplecam');
+simplecamshot.config.createImage = false;
+simplecamshot.init(container);
+var c = document.createElement('canvas');
+var cx = c.getContext('2d');
+var img = document.createElement('img');
+img.style.display = 'none';
+container.appendChild(img);
+container.addEventListener(
+  'imagetaken',
+   function(data) {
+     this.appendChild(c);
+     var video = document.querySelector('video');
+     c.width = video.width;
+     c.height = video.height;
+     cx.drawImage(video,0,0, video.width, video.height);
+     cx.fillStyle = 'rgba(160, 32, 240, 0.6)';
+     cx.fillRect(0, 0, video.width, video.height);
+     cx.fillStyle = 'white';
+     cx.font = '20px Arial';
+     cx.fillText('#RIPPrince', 215, 20);
+     c.style.display = 'none';
+     img.src = c.toDataURL('image/jpg');
+     img.style.display = 'block';
+  }
+);
+</script>
+
+<p>This is a demo page for <a href="https://github.com/codepo8/simplecamshot">SimpleCamShot</a>. Go there to read all about it, fork it, file issues, praise the maker and such.</p>
+
+<footer>Written by Chris Heilmann using Visual Studio Code…</footer>
+</body>
+</html>
